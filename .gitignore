@@ -1,0 +1,16 @@
+# Ignore node_modules in the root, client, and server folders
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Ignore environment variables
+.env
+client/.env
+server/.env
+
+# Ignore build artifacts
+client/build
+server/dist
+
+# Ignore log files
+*.log
