@@ -1,5 +1,9 @@
 # Gator Grind
 
+## Prerequisites
+
+1. [Node.js](https://nodejs.org/en)
+
 ## Contributing
 
 1. Clone repository to local
