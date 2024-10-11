@@ -10,7 +10,15 @@ import Dashboard from './routes/Dashboard';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <LandingPage />, //landing page at root
+  },
+  {
+    path: '/signup',
+    element: <SignUp />, //page for signup
+  },
+  {
+    path: '/login',
+    element: <Login />, //page for login
   },
   {
     path: '/dashboard',
