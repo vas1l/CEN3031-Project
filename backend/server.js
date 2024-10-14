@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const userRoutes = require("./routes/userRoutes")
 
 // Load environment variables
 dotenv.config();
@@ -32,7 +33,4 @@ mongoose.connect(process.env.MONGODB_URI, {
   console.error('MongoDB connection error:', error.message);
 });
 
-// Simple route for testing
-app.get('/', (req, res) => {
-  res.send('Backend server is running');
-});
+app.use('/user', userRoutes);
