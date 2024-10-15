@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
+const mongoose = require('mongoose'); // for working in mongoDB
+const bcrypt = require('bcrypt'); // for password hashing
+const jwt = require('jsonwebtoken'); // for creating tokens
 
 router.post('/signup', async (req, res) => {
     res.json({ mssg: "POST a new user" });
