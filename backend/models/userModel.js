@@ -1,29 +1,38 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// Define the User schema
 const userSchema = new mongoose.Schema({
+  firstname: {
+    type: String,
+    required: [true, 'First name is required'],
+    minlength: [1, 'First name must be at least 1 character long'],
+  },
+  lastname: {
+    type: String,
+    required: [true, 'Last name is required'],
+    minlength: [1, 'Last name must be at least 1 character long'],
+  },
   username: {
     type: String,
     required: [true, 'Username is required'],
     unique: true,
-    minlength: 3
+    minlength: 3,
   },
   email: {
     type: String,
     required: [true, 'Email is required'],
     unique: true,
-    match: [/\S+@\S+\.\S+/, 'Email is not valid'] // Email validation
+    match: [/\S+@\S+\.\S+/, 'Email is not valid'], // Email validation
   },
   password: {
     type: String,
     required: [true, 'Password is required'],
-    minlength: [6, 'Password must be at least 6 characters long']
+    minlength: [6, 'Password must be at least 6 characters long'],
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 // Pre-save hook to hash the password before saving the user
