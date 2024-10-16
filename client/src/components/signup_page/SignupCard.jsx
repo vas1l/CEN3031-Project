@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { apiBaseUrl } from '../../../utils/url';
 
 function SignupCard() {
   const [formData, setFormData] = useState({
@@ -21,8 +22,7 @@ function SignupCard() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5001/api/user/signup`, {
-        // TODO: Change URL to work outside of
+      const response = await fetch(`${apiBaseUrl}/api/user/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
