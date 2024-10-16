@@ -1,5 +1,11 @@
+import LandingPage from '../../../pages/landing_page/LandingPage';
+
 function Root() {
-  return <div>This is the root route</div>;
+  return (
+    <>
+      <LandingPage />
+    </>
+  );
 }
 
 export default Root;

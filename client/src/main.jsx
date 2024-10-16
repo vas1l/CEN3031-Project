@@ -12,19 +12,7 @@ import Login from './routes/Login';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LandingPage />, //landing page at root
-  },
-  {
-    path: '/signup',
-    element: <SignUp />, //page for signup
-  },
-  {
-    path: '/login',
-    element: <Login />, //page for login
-  },
-  {
-    path: '/dashboard',
-    element: <Dashboard />,
+    element: <Root />,
   },
   {
     path: '/signup',
@@ -33,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
   },
 ]);
 

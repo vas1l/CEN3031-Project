@@ -1,5 +1,11 @@
+import DashboardPage from '../../../pages/dashboard_page/DashboardPage';
+
 function Dashboard() {
-  return <div>This is the dashboard route</div>;
+  return (
+    <>
+      <DashboardPage />
+    </>
+  );
 }
 
 export default Dashboard;
