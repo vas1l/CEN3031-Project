@@ -1,5 +1,21 @@
 # Gator Grind
 
+## Repository structure
+
+```
+- backend
+- client
+   - public: all pictures/videos/icons/etc stored here
+   - src:
+      - components: all components are stored here
+         - create a folder within to store components for a specific page along with their styles.
+      - pages: page components are stored here
+         - create a folder within to store a page along with their styles.
+      - routes: route components are stored here
+      - index.css: default styles that are applied to all components are in this file
+      - main.jsx: this is the root component
+```
+
 ## Prerequisites
 
 1. [Node.js](https://nodejs.org/en)
