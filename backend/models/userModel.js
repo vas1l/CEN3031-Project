@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
 
 // Pre-save hook to hash the password before saving the user
 userSchema.pre('save', async function (next) {
-  // Only hash the password if it has been modified (or is new)
+  // Only hash password if modified or new
   if (!this.isModified('password')) return next();
 
   try {
@@ -50,11 +50,10 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-// Method to compare password during login
+// Compare password during login
 userSchema.methods.isPasswordMatch = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Create and export the User model
 const User = mongoose.model('User', userSchema);
 module.exports = User;
