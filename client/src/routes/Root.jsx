@@ -1,4 +1,4 @@
-import LandingPage from '../../../pages/landing_page/LandingPage';
+import LandingPage from '../pages/landing_page/LandingPage';
 
 function Root() {
   return (

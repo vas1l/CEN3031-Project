@@ -1,0 +1,79 @@
+.login-page {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 16px 32px 16px;
+  width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 0.5px solid #ccc;
+}
+
+.title {
+  width: full;
+  border-bottom: 0.5px solid #ccc;
+  padding-left: 12px;
+}
+
+.title h1 {
+  margin-top: 0;
+  padding-top: 0;
+  font-weight: 600;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.title p {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.user-information {
+  padding-top: 16px;
+  display: grid;
+  margin-right: 12px;
+  margin-left: 12px;
+}
+
+.user-information label {
+  font-size: 0.9rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.user-information input {
+  font-size: 1.05rem;
+  padding: 8px 12px 8px 12px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 0.5px solid #ccc;
+}
+
+.login-help {
+  font-size: 0.9rem;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.user-information button {
+  font-size: 1.05rem;
+  margin-top: 4px;
+  padding: 10px 12px 10px 12px;
+  color: #fff;
+  background-color: #549efc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-information button:hover {
+  background-color: #549dfcd0;
+}

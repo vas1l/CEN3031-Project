@@ -1,4 +1,4 @@
-import DashboardPage from '../../../pages/dashboard_page/DashboardPage';
+import DashboardPage from '../pages/dashboard_page/DashboardPage';
 
 function Dashboard() {
   return (
