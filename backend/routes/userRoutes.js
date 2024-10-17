@@ -36,8 +36,26 @@ router.post('/signup', async (req, res) => {
   }
 });
 
+// Get using username
 router.get('/:userName', async (req, res) => {
-  res.json({ mssg: `Get user with ID: ${req.params.userName}` });
+  const username = req.params.userName;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({
+        mssg: `User (${username}) not found`,
+      });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      mssg: 'Server error',
+      error: error,
+    });
+  }
 });
 
 router.post('/login', async (req, res) => {
