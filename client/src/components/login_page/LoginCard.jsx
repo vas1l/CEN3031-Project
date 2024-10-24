@@ -65,7 +65,7 @@ function LoginCard() {
       </div>
 
       <form className='user-information' onSubmit={handleSubmit}>
-        <label htmlFor='email'>Username</label>
+        <label htmlFor='email'>Email</label>
         <input
           type='text'
           name='email'
