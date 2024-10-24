@@ -63,16 +63,20 @@ router.get('/:userName', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Please fill in all fields' });
+  }
+
   // Check user exists
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(400).json({ success: false });
+    return res.status(400).json({ error: 'Invalid email or password.' });
   }
 
   // Check password is correct
   const validPassword = await bcrypt.compare(password, user.password);
   if (!validPassword) {
-    return res.status(400).json({ success: false });
+    return res.status(400).json({ error: 'Invalid email or password.' });
   }
 
   // JWT
