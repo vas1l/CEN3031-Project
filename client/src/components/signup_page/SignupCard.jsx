@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { apiBaseUrl } from '../../../utils/url';
 
 function SignupCard() {
@@ -12,6 +12,15 @@ function SignupCard() {
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
+
+  // Redirect to login page upon signup success
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/login');
+    }, 2000);
+  }, [success]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -101,7 +110,11 @@ function SignupCard() {
         />
 
         <button>
-          {!success ? <div>Sign Up</div> : <div>Signup Successful</div>}
+          {!success ? (
+            <div>Sign Up</div>
+          ) : (
+            <div>Signup Successful. Redirecting to login</div>
+          )}
         </button>
       </form>
       {/* Error message */}
