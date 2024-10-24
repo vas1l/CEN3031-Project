@@ -1,4 +1,7 @@
 const express = require('express');
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const router = express.Router();
 
@@ -59,7 +62,36 @@ router.get('/:userName', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  res.json({ message: 'Login a user' });
+  const { email, password } = req.body;
+
+  // Check user exists
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json({ success: false });
+  }
+
+  // Check password is correct
+  const validPassword = await bcrypt.compare(password, user.password);
+  if (!validPassword) {
+    return res.status(400).json({ success: false });
+  }
+
+  // JWT
+  const token = jwt.sign(
+    { id: user._id, email: user.email },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: '24hr' }
+  );
+
+  // For testing in Postman
+  // res.json({ success: true, token });
+
+  res
+    .cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+    })
+    .json({ sucess: true });
 });
 
 router.post('/logout', async (req, res) => {
