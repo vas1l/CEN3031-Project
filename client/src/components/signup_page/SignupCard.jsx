@@ -17,9 +17,11 @@ function SignupCard() {
 
   // Redirect to login page upon signup success
   useEffect(() => {
-    setTimeout(() => {
-      navigate('/login');
-    }, 2000);
+    if (success) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    }
   }, [success]);
 
   const handleChange = (e) => {
@@ -63,6 +65,7 @@ function SignupCard() {
           Already have an account? <Link to='/login'>Log In</Link>
         </p>
       </div>
+
       <form className='user-information' onSubmit={handleSubmit}>
         <label htmlFor='firstname'>First Name</label>
         <input
@@ -70,6 +73,7 @@ function SignupCard() {
           name='firstname'
           id='firstname'
           placeholder='John'
+          value={formData.firstname}
           onChange={handleChange}
         />
 
@@ -79,6 +83,7 @@ function SignupCard() {
           name='lastname'
           id='lastname'
           placeholder='Doe'
+          value={formData.lastname}
           onChange={handleChange}
         />
 
@@ -88,6 +93,7 @@ function SignupCard() {
           name='username'
           id='username'
           placeholder='username'
+          value={formData.username}
           onChange={handleChange}
         />
 
@@ -97,6 +103,7 @@ function SignupCard() {
           name='email'
           id='email'
           placeholder='user@email.com'
+          value={formData.email}
           onChange={handleChange}
         />
 
@@ -106,6 +113,7 @@ function SignupCard() {
           name='password'
           id='password'
           placeholder='password'
+          value={formData.password}
           onChange={handleChange}
         />
 
@@ -113,7 +121,7 @@ function SignupCard() {
           {!success ? (
             <div>Sign Up</div>
           ) : (
-            <div>Signup Successful. Redirecting to login</div>
+            <div>Sign Up Successful. Redirecting to login.</div>
           )}
         </button>
       </form>
