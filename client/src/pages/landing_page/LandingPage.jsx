@@ -1,10 +1,13 @@
 import Navbar from '../../components/landing_page/Navbar';
+import AboutSection from '../../components/landing_page/about';
+
 
 function LandingPage() {
   return (
     <>
       <Navbar />
-      This is where the landing page will be
+      
+      <AboutSection />
     </>
   );
 }
