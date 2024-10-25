@@ -107,4 +107,24 @@ router.post('/logout', async (req, res) => {
   res.json({ mssg: 'Logged out successfully' });
 });
 
+router.delete('/:userName', async (req, res) => {
+    try
+        {
+        const user = req.params.userName;
+        if (!user) {
+            return res.status(404).json({
+              mssg: `User (${username}) not found`,
+            })
+        }else{
+            await User.deleteOne({ username: user });
+            res.json({ mssg: `User (${username}) deleted` });}
+
+         } catch (error) {
+            res.status(500).json({
+                mssg: 'Server error',
+                error: error,
+            }); 
+    }
+    });
+
 module.exports = router;
