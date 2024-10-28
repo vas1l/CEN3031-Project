@@ -5,8 +5,8 @@ import AboutSection from '../../components/landing_page/about';
 function LandingPage() {
   return (
     <>
+      <div className="background"></div>
       <Navbar />
-      
       <AboutSection />
     </>
   );

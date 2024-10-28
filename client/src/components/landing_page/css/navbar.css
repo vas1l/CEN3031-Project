@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #dbf4d2;
+  background-color: #0021a5;
   height: 4rem;
   border-radius: 0.375rem;
   padding: 0 1.5rem;
@@ -16,6 +16,8 @@
 .navbar h1 {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #ffffff;
+
 }
 
 .mobile-menu-button {
@@ -44,7 +46,7 @@
 .menu-item {
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: #f3f4f6;
 }
 
 .menu-item:hover {
@@ -53,7 +55,7 @@
 
 .nav-button {
   padding: 0.5rem 0.75rem;
-  background-color: #f9fafb;
+  background-color: #fa4616;
   border-radius: 0.375rem;
   cursor: pointer;
   transition: background-color 0.15s ease;
