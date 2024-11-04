@@ -62,3 +62,28 @@
     text-decoration: underline;
     color: #ff4500;
 }
+.post-form {
+    margin-top: 10px;
+}
+
+.post-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #ff4500;
+}

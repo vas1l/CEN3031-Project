@@ -4,6 +4,8 @@ import "./MoodTracker.css";
 import "./ForumPosts.css";
 import "./Profile.css";
 
+
+
 function DashboardPage() {
   return (
     <div>
@@ -14,6 +16,7 @@ function DashboardPage() {
         <MoodTracker /> 
         <Profile />
         <ForumPosts />
+
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import Root from './routes/Root';
 import Dashboard from './routes/Dashboard';
 import Signup from './routes/Signup';
 import Login from './routes/Login';
+import Forum from './routes/Forum';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
+  },
+  {
+    path: '/forum',
+    element: <Forum />,
   },
 ]);
 
