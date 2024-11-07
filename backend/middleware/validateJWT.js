@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 /*
-    Use this middleware to protect a route from unauthorized users from accessing data.
+  Use this middleware to protect a route from unauthorized users from accessing data.
 */
 
 function authenticateToken(req, res, next) {
@@ -18,7 +18,11 @@ function authenticateToken(req, res, next) {
       });
     }
 
+    console.log('JWT decoded token payload:', user);
+
     req.user = user;
     next();
   });
 }
+
+module.exports = authenticateToken;

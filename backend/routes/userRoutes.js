@@ -2,8 +2,10 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
+const authenticateToken = require('../middleware/validateJWT');
 const router = express.Router();
 
+// Signup
 router.post('/signup', async (req, res) => {
   const { firstname, lastname, username, email, password } = req.body;
 
@@ -38,28 +40,7 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Get using username
-router.get('/:userName', async (req, res) => {
-  const username = req.params.userName;
-
-  try {
-    const user = await User.findOne({ username });
-
-    if (!user) {
-      return res.status(404).json({
-        mssg: `User (${username}) not found`,
-      });
-    }
-
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({
-      mssg: 'Server error',
-      error: error,
-    });
-  }
-});
-
+// Login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -92,39 +73,93 @@ router.post('/login', async (req, res) => {
   res
     .cookie('token', token, {
       httpOnly: true,
-      secure: true,
+      // Set secure and sameSite different for production
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
     })
     .json({ sucess: true });
 });
 
+// Logout
 router.post('/logout', async (req, res) => {
   // Clear cookie from browser
   res.clearCookie('token', {
     httpOnly: true,
-    secure: true,
-    sameSite: 'Strict',
+    // Set secure and sameSite different for production
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
   });
   res.json({ mssg: 'Logged out successfully' });
 });
 
-router.delete('/:userName', async (req, res) => {
-    try
-        {
-        const user = req.params.userName;
-        if (!user) {
-            return res.status(404).json({
-              mssg: `User (${username}) not found`,
-            })
-        }else{
-            await User.deleteOne({ username: user });
-            res.json({ mssg: `User (${username}) deleted` });}
+// Get user with JWT
+router.get('/getbyjwt', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    console.log('UserId from token:', userId);
+    const user = await User.findById(userId);
 
-         } catch (error) {
-            res.status(500).json({
-                mssg: 'Server error',
-                error: error,
-            }); 
+    if (!user) {
+      return res.status(404).json({
+        mssg: 'User not found',
+      });
     }
+
+    res.json({
+      id: user._id,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      mssg: 'Internal server error',
+    });
+  }
+});
+
+// Get using username
+router.get('/:userName', async (req, res) => {
+  const username = req.params.userName;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({
+        mssg: `User (${username}) not found`,
+      });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      mssg: 'Server error',
+      error: error,
+    });
+  }
+});
+
+// // Delete by username
+// router.delete('/:userName', async (req, res) => {
+//   try {
+//     const user = req.params.userName;
+//     if (!user) {
+//       return res.status(404).json({
+//         mssg: `User (${username}) not found`,
+//       });
+//     } else {
+//       await User.deleteOne({ username: user });
+//       res.json({ mssg: `User (${username}) deleted` });
+//     }
+//   } catch (error) {
+//     res.status(500).json({
+//       mssg: 'Server error',
+//       error: error,
+//     });
+//   }
+// });
 
 module.exports = router;

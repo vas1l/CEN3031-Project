@@ -3,15 +3,31 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const cookieParser = require('cookie-parser');
 
-// Load environment variables
+// Load environment variables and check
 dotenv.config();
+
+if (
+  !process.env.PORT ||
+  !process.env.MONGODB_URI ||
+  !process.env.JWT_SECRET_KEY
+) {
+  throw new Error('Missing necessary environment variables.');
+}
 
 const app = express();
 
+// Cors
+const corsOptions = {
+  origin: 'http://localhost:5173', // for dev
+  credentials: true,
+};
+
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json()); // Parse JSON bodies
+app.use(cookieParser());
 
 // Connect to MongoDB
 mongoose

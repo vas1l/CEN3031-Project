@@ -29,8 +29,6 @@ function LoginCard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
     try {
       const response = await fetch(`${apiBaseUrl}/api/user/login`, {
         method: 'POST',
