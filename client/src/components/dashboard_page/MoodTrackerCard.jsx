@@ -1,6 +1,6 @@
 import './MoodTrackerCard.css';
 
-const MoodTrackerCard = () => {
+const MoodTrackerCard = ({ userData }) => {
   return (
     <section className='mood-tracker'>
       <h2 className='section-title'>How are you feeling today?</h2>

@@ -37,9 +37,9 @@ function DashboardPage() {
           : error}
       </h1>
       <div className='dashboard-organization'>
-        <MoodTrackerCard />
-        <ProfileCard />
-        <ForumPostsCard />
+        <MoodTrackerCard userData={userData} />
+        <ProfileCard userData={userData} />
+        <ForumPostsCard userData={userData} />
       </div>
     </div>
   );

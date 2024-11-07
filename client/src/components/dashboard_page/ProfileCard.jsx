@@ -1,6 +1,6 @@
 import './ProfileCard.css';
 
-const ProfileCard = () => {
+const ProfileCard = ({ userData }) => {
   return (
     <section className='profile'>
       <h2 className='section-title'>Profile Information</h2>
@@ -13,7 +13,9 @@ const ProfileCard = () => {
       <div className='profile-info'>
         <div className='info-row'>
           <p className='heading'>Full Name:</p>
-          <p className='personal-info'>Diksha Gupta</p>
+          <p className='personal-info'>
+            {userData ? `${userData.firstname} ${userData.lastname}` : 'Error'}
+          </p>
         </div>
 
         <div className='info-row'>
@@ -23,17 +25,19 @@ const ProfileCard = () => {
 
         <div className='info-row'>
           <p className='heading'>Email:</p>
-          <p className='personal-info'>diksha230604@gmail.com</p>
+          <p className='personal-info'>
+            {userData ? `${userData.email}` : 'Error'}
+          </p>
         </div>
 
         <div className='info-row'>
           <p className='heading'>Location:</p>
-          <p className='personal-info'>Gainesville, Florida</p>
+          <p className='personal-info'>Sample, Location</p>
         </div>
 
         <div className='info-row'>
           <p className='heading'>Social Media:</p>
-          <p className='personal-info'>Instagram: diksha.gupt.a</p>
+          <p className='personal-info'>Instagram: @sample</p>
         </div>
       </div>
     </section>
