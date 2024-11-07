@@ -1,35 +1,36 @@
-
 /* Title */
 .Title {
-    margin-left: 40px;
+  margin-left: 40px;
+}
+
+.welcome {
+  margin-left: 40px;
+  font-weight: lighter;
 }
 
 /* Entire Page */
 body {
-    background-color:  #f9f9f9;
-    margin: 0;
-    font-family: 'Poppins';
-    color: #333;
-    font-weight: 100;
+  background-color: #f9f9f9;
+  margin: 0;
+  font-family: 'Poppins';
+  color: #333;
+  font-weight: 100;
 }
-
 
 /* Dashboard Container */
 .dashboard-organization {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    justify-content: space-evenly;
-    width: 100%;
-    gap: 1px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  gap: 25px;
+  padding: 25px 50px 0 50px;
 }
-
 
 /* Global Section Title Styling */
 .section-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
 }

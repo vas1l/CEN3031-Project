@@ -1,0 +1,48 @@
+.profile {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  min-height: 350px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 50;
+  color: #424242;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.about-me {
+  font-size: 12px;
+  font-weight: 300;
+  color: #555;
+  margin-bottom: 0px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info .info-row {
+  display: flex;
+}
+
+.heading {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.personal-info {
+  font-size: 12px;
+  font-weight: 300;
+  color: #b3b3b3;
+  text-align: left;
+  flex: 1;
+  padding-left: 10px;
+}
+
+.social-media-icons {
+  display: flex;
+}
