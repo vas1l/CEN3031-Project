@@ -16,10 +16,18 @@ function Chat() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef(null);
+  const messageListRef = useRef(null);
 
   // keep focus on input field
   useEffect(() => {
     inputRef.current?.focus();
+  }, [messages, isLoading]);
+
+  // Auto scroll to bottom when messages change
+  useEffect(() => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+    }
   }, [messages, isLoading]);
 
   const handleKeyPress = (e) => {
@@ -62,7 +70,7 @@ function Chat() {
 
   return (
     <div className='chatbot-container'>
-      <div className='message-list'>
+      <div className='message-list' ref={messageListRef}>
         {messages.map((msg, i) => (
           <div key={i} className={`message ${msg.role}`}>
             {msg.role === 'assistant' ? (
