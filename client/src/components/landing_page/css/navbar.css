@@ -15,9 +15,8 @@
 
 .navbar h1 {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 800;
   color: #ffffff;
-
 }
 
 .mobile-menu-button {
@@ -47,6 +46,7 @@
   cursor: pointer;
   text-decoration: none;
   color: #f3f4f6;
+  font-weight: 600;
 }
 
 .menu-item:hover {
@@ -58,11 +58,13 @@
   background-color: #fa4616;
   border-radius: 0.375rem;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .nav-button:hover {
-  background-color: #f3f4f6;
+  background-color: #fb6941;
+  color: #ffffff;
   text-decoration: none;
 }
 

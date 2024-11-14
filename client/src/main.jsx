@@ -9,6 +9,7 @@ import Dashboard from './routes/Dashboard';
 import Signup from './routes/Signup';
 import Login from './routes/Login';
 import Forum from './routes/Forum';
+import Albert from './routes/Albert';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/forum',
     element: <Forum />,
+  },
+  {
+    path: '/albert',
+    element: <Albert />,
   },
 ]);
 
