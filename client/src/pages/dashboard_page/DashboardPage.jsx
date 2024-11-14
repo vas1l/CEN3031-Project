@@ -5,7 +5,7 @@ import './DashboardPage.css';
 import ProfileCard from '../../components/dashboard_page/ProfileCard';
 import MoodTrackerCard from '../../components/dashboard_page/MoodTrackerCard';
 import ForumPostsCard from '../../components/dashboard_page/ForumPostsCard';
-
+import LoggedInNavbar from '../../components/loggedInNavbar';
 function DashboardPage() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -30,6 +30,7 @@ function DashboardPage() {
 
   return (
     <div>
+      <LoggedInNavbar />
       <h1 className='Title'>Dashboard</h1>
       <h1 className='welcome'>
         {userData
