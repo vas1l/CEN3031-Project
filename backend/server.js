@@ -2,8 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const userRoutes = require('./routes/userRoutes');
 const cookieParser = require('cookie-parser');
+// routes
+const userRoutes = require('./routes/userRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
 // Load environment variables and check
 dotenv.config();
@@ -50,3 +52,4 @@ mongoose
 
 // Mount routes
 app.use('/api/user', userRoutes);
+app.use('/api/chat', chatRoutes);
