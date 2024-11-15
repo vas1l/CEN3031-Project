@@ -1,6 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  redirect,
+} from 'react-router-dom';
 import './index.css';
 
 // Routes
@@ -10,6 +14,26 @@ import Signup from './routes/Signup';
 import Login from './routes/Login';
 import Forum from './routes/Forum';
 import Albert from './routes/Albert';
+import { apiBaseUrl } from '../utils/url';
+
+// loader function to protect routes from unauthorized users
+const protectedLoader = async () => {
+  try {
+    // use the validateJWT middleware to handle token validation
+    const response = await fetch(`${apiBaseUrl}/api/user/getbyjwt`, {
+      credentials: 'include', // send cookies with request
+    });
+
+    if (!response.ok) {
+      return redirect('/login');
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Error:', error);
+    return redirect('/login');
+  }
+};
 
 const router = createBrowserRouter([
   {
@@ -27,14 +51,17 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
+    loader: protectedLoader,
   },
   {
     path: '/forum',
     element: <Forum />,
+    loader: protectedLoader,
   },
   {
     path: '/albert',
     element: <Albert />,
+    loader: protectedLoader,
   },
 ]);
 

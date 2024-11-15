@@ -96,8 +96,7 @@ router.post('/logout', async (req, res) => {
 router.get('/getbyjwt', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    console.log('UserId from token:', userId);
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select('-password');
 
     if (!user) {
       return res.status(404).json({
@@ -105,13 +104,7 @@ router.get('/getbyjwt', authenticateToken, async (req, res) => {
       });
     }
 
-    res.json({
-      id: user._id,
-      username: user.username,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-    });
+    res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({
