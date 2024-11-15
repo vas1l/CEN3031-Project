@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
 import './landing_page/css/navbar.css';
+import { apiBaseUrl } from '../../utils/url';
 
 function LoggedInNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,9 +35,27 @@ function LoggedInNavbar() {
     setIsOpen(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/user/logout`, {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        navigate('/');
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
   return (
     <nav ref={navbarRef} className='navbar'>
       <Link to='/dashboard'>
+        {/* Put logo */}
         <h1>GatorGrind</h1>
       </Link>
 
@@ -54,7 +74,7 @@ function LoggedInNavbar() {
         <Link to='/albert' className='menu-item'>
           Chat with Albert
         </Link>
-        <Link to='/' className='menu-item nav-button'>
+        <Link to='/' onClick={handleLogout} className='menu-item nav-button'>
           Sign Out
         </Link>
       </ul>
@@ -68,7 +88,14 @@ function LoggedInNavbar() {
           <Link to='/albert' className='menu-item' onClick={closeMenu}>
             Chat with Albert
           </Link>
-          <Link to='/' className='menu-item nav-button' onClick={closeMenu}>
+          <Link
+            to='/'
+            onClick={() => {
+              handleLogout();
+              closeMenu();
+            }}
+            className='menu-item nav-button'
+          >
             Sign Out
           </Link>
         </ul>
