@@ -1,9 +1,15 @@
+import { Link } from 'react-router-dom';
 import './ForumPostsCard.css';
 
 const ForumPostsCard = () => {
   return (
     <section className='forum-posts'>
-      <h2 className='section-title'>Forum Posts</h2>
+      <div className='forum-header'>
+        <h2 className='section-title'>Forum Posts</h2>
+        <Link to='/forum'>
+          <button className='view-forum-btn'>View All Forum Posts</button>
+        </Link>
+      </div>
 
       <div className='posts'>
         <div className='content'>
