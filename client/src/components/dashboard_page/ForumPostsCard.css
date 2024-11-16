@@ -16,6 +16,27 @@
   justify-content: space-between;
 }
 
+/* Header section with title and button */
+.section-title {
+  margin: 0;
+}
+
+.forum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.view-forum-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 /* Each Post */
 .posts {
   display: flex;
@@ -57,6 +78,7 @@
   text-decoration: underline;
   color: #ff4500;
 }
+
 .post-form {
   margin-top: 10px;
 }

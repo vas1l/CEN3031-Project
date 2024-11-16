@@ -14,6 +14,7 @@ import Signup from './routes/Signup';
 import Login from './routes/Login';
 import Forum from './routes/Forum';
 import Albert from './routes/Albert';
+import CreatePost from './routes/CreatePost';
 import { apiBaseUrl } from '../utils/url';
 
 // loader function to protect routes from unauthorized users
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
   {
     path: '/forum',
     element: <Forum />,
+    loader: protectedLoader,
+  },
+  {
+    path: '/forum/create-post',
+    element: <CreatePost />,
     loader: protectedLoader,
   },
   {
