@@ -27,6 +27,32 @@ function ForumPosts() {
     fetchPosts();
   }, []);
 
+  // like/unlike post
+  const handleLike = async (postId) => {
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/forum/like/${postId}`, {
+        method: 'PUT',
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to like post');
+      }
+
+      const updatedPost = await response.json();
+
+      // update posts state with the updated post
+      setPosts(
+        posts.map((post) =>
+          post._id === postId ? { ...updatedPost, userId: post.userId } : post
+        )
+      );
+    } catch (err) {
+      setError('Failed to like post');
+      console.error('Error liking post:', err);
+    }
+  };
+
   const categories = [
     'All',
     'General',
@@ -74,6 +100,13 @@ function ForumPosts() {
             <p>Posted by: {post.userId.username}</p>
             <p>{post.content}</p>
             <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
+            <div>
+              <button onClick={() => handleLike(post._id)}>
+                {post.likes && post.likes.length > 0
+                  ? `❤️ ${post.likes.length}`
+                  : '🤍 0'}
+              </button>
+            </div>
           </div>
         ))}
       </div>

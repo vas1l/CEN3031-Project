@@ -42,6 +42,29 @@ router.post('/create', authenticateToken, async (req, res) => {
 
 // todo: delete post route
 
-// todo: like post route. Add by user id so that on the frontend we can display the count without repeats from users
+// like/unlike post route
+router.put('/like/:postId', authenticateToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    const likeIndex = post.likes.findIndex((id) => id.equals(req.user.id));
+
+    // if user hasn't liked post yet, add like. otherwise remove like
+    if (likeIndex === -1) {
+      post.likes.push(req.user.id);
+    } else {
+      post.likes.splice(likeIndex, 1);
+    }
+
+    await post.save();
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating post likes' });
+  }
+});
 
 module.exports = router;
