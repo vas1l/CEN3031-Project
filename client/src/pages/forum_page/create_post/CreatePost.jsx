@@ -43,13 +43,13 @@ function CreatePost() {
 
   return (
     <div className='create-post-container'>
-      <button onClick={handleBack}>Back to Forum</button>
+      <button id='back-to-forum-btn' onClick={handleBack}>Back to Forum</button>
       <h1>Create New Post</h1>
       {error && <p className='error'>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='title'>Title:</label>
+          <label htmlFor='title'>Title: </label>
           <input
             type='text'
             id='title'
@@ -62,9 +62,9 @@ function CreatePost() {
         </div>
 
         <div>
-          <label htmlFor='category'>Category:</label>
-          <select
-            id='category'
+          <label htmlFor='category'>Category: </label>
+          <select 
+            id='custom-label-select'
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             required
@@ -79,7 +79,7 @@ function CreatePost() {
         </div>
 
         <div>
-          <label htmlFor='content'>Content:</label>
+          <label htmlFor='content'>Content: </label>
           <textarea
             id='content'
             value={content}
@@ -91,7 +91,7 @@ function CreatePost() {
           />
         </div>
 
-        <button type='submit'>Create Post</button>
+        <button id = 'back-to-forum-btn' type='submit'>Create Post</button>
       </form>
     </div>
   );
