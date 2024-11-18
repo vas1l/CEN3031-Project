@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiBaseUrl } from '../../../utils/url';
 import './ForumPosts.css';
 import './Createpostbutton.css';
+import { FaHeart } from 'react-icons/fa';
 
 function ForumPosts() {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,8 +30,8 @@ function ForumPosts() {
     fetchPosts();
   }, []);
 
-  // like/unlike post
-  const handleLike = async (postId) => {
+  const handleLike = async (e, postId) => {
+    e.stopPropagation(); // Prevent post click when liking
     try {
       const response = await fetch(`${apiBaseUrl}/api/forum/like/${postId}`, {
         method: 'PUT',
@@ -42,7 +44,6 @@ function ForumPosts() {
 
       const updatedPost = await response.json();
 
-      // update posts state with the updated post
       setPosts(
         posts.map((post) =>
           post._id === postId ? { ...updatedPost, userId: post.userId } : post
@@ -52,6 +53,10 @@ function ForumPosts() {
       setError('Failed to like post');
       console.error('Error liking post:', err);
     }
+  };
+
+  const handlePostClick = (postId) => {
+    navigate(`/forum/post/${postId}`);
   };
 
   const categories = [
@@ -73,7 +78,7 @@ function ForumPosts() {
     <div className='forum-posts-container'>
       <h1>Community Forum</h1>
       <Link to='/forum/create-post'>
-        <button id="create-post-btn">Create New Post</button>
+        <button id='create-post-btn'>Create New Post</button>
       </Link>
 
       <div>
@@ -95,17 +100,28 @@ function ForumPosts() {
 
       <div>
         {filteredPosts.map((post) => (
-          <div key={post._id}>
+          <div
+            key={post._id}
+            onClick={() => handlePostClick(post._id)}
+            className='post-item'
+            style={{ cursor: 'pointer' }}
+          >
             <h2>{post.title}</h2>
             <p>Category: {post.category}</p>
             <p>Posted by: {post.userId.username}</p>
             <p>{post.content}</p>
             <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
             <div>
-              <button onClick={() => handleLike(post._id)}>
-                {post.likes && post.likes.length > 0
-                  ? `❤️ ${post.likes.length}`
-                  : '🤍 0'}
+              <button onClick={(e) => handleLike(e, post._id)}>
+                {post.likes && post.likes.length > 0 ? (
+                  <>
+                    <FaHeart className='icon' /> {post.likes.length}
+                  </>
+                ) : (
+                  <>
+                    <FaHeart className='icon' /> 0
+                  </>
+                )}
               </button>
             </div>
           </div>
