@@ -38,6 +38,23 @@ router.post('/create', authenticateToken, async (req, res) => {
   }
 });
 
+// get forum posts by userid (JWT) route
+// for the dashboard page
+router.get('/get-posts-by-userid', authenticateToken, async (req, res) => {
+  try {
+    const posts = await Post.find({ userId: req.user.id })
+      .populate('userId', 'username')
+      .populate('likes', 'username')
+      .populate('comments.userId', 'username')
+      .sort({
+        createdAt: -1,
+      });
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching posts' });
+  }
+});
+
 // todo: add comment to post route
 
 // todo: delete post route
