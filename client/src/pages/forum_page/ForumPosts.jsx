@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { apiBaseUrl } from '../../../utils/url';
 import './ForumPosts.css';
+import './Createpostbutton.css';
 
 function ForumPosts() {
   const [posts, setPosts] = useState([]);
@@ -72,7 +73,7 @@ function ForumPosts() {
     <div className='forum-posts-container'>
       <h1>Community Forum</h1>
       <Link to='/forum/create-post'>
-        <button>Create New Post</button>
+        <button id="create-post-btn">Create New Post</button>
       </Link>
 
       <div>

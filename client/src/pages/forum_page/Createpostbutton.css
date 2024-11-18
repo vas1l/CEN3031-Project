@@ -1,0 +1,29 @@
+/* Button styling */
+#create-post-btn {
+    background-color: #fa4616; /* Gator orange color */
+    color: white; /* White text for contrast */
+    font-size: 16px; /* Larger font for visibility */
+    padding: 7px 10px; /* Padding for clickable area */
+    border: none; /* Removes default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+/* Hover effect */
+#create-post-btn:hover {
+    background-color: #0021a5; /* gator blue on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Active (click) effect */
+#create-post-btn:active {
+    background-color: #003f8a; /* slightly lighter blue */
+    transform: scale(0.95); /* Slightly smaller when clicked */
+}
+
+/* Disabled state */
+#create-post-btn:disabled {
+    background-color: #cccccc; /* Gray for disabled state */
+    cursor: not-allowed; /* Not-allowed cursor for disabled */
+    transform: none; /* Remove scale effect */
+}
