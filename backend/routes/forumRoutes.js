@@ -17,6 +17,23 @@ router.get('/get-all-posts', authenticateToken, async (req, res) => {
   }
 });
 
+// get specific post by id route
+router.get('/get-post/:id', authenticateToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id)
+      .populate('userId', 'username')
+      .populate('comments.userId', 'username');
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching post' });
+  }
+});
+
 // create new post route
 router.post('/create', authenticateToken, async (req, res) => {
   try {
