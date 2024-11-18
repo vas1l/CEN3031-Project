@@ -4,6 +4,13 @@
 
 ```
 - backend
+   - .env: environment variables
+   - controllers: handles business logic and processes requests from routes
+   - middleware: contains functions that run before requests reach routes
+   - models: defines database schemas and models
+   - routes: defines API endpoints and routes requests to controllers
+   - index.js: this is the main server file for the backend
+
 - client
    - public: all pictures/videos/icons/etc stored here
    - src:
@@ -25,18 +32,19 @@
 1. Clone repository to local
 
 ```bash
+# open a first terminal and clone the repository
 git clone https://github.com/vas1l/CEN3031-Project.git
 ```
 
 2. Install dependencies
 
 ```bash
-# install client dependencies
-cd client
+# open a second terminal and install client dependencies
+# cd into client folder
 npm install
 
-# install backend dependencies
-cd ../backend
+# open a third terminal and install backend dependencies
+# cd into backend folder
 npm install
 
 # return to root directory
@@ -45,21 +53,30 @@ cd ..
 
 3. Add .env to backend
 
-   - Create a new folder under backend named: .env
-   - Paste environment variables
+   - Right click the backend folder and click new file (reference file structure above if necessary)
+   - Create a new file under backend named: .env
+   - Paste environment variables (from discord)
 
 4. Change to dev branch
 
 ```bash
+# open the first terminal and checkout to dev branch
 git checkout dev
 ```
 
-5. Move to backend/frontend folder and begin coding
+5. Pull most recent changes
 
 ```bash
-# for backend
-cd backend
+git pull origin dev
+# or replace dev with whichever branch you are working on
+```
 
-# for frontend
-cd client
+6. Start backend/frontend servers
+
+```bash
+# open the second terminal from before and start frontend server
+npm run dev
+
+# open the third terminal from before and start backend server
+npm start
 ```
