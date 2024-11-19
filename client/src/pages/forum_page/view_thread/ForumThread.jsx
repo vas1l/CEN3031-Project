@@ -9,6 +9,7 @@ const ForumThread = () => {
   const [post, setPost] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [comment, setComment] = useState('');
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -40,6 +41,7 @@ const ForumThread = () => {
     navigate('/forum');
   };
 
+  // like post
   const handleLike = async () => {
     try {
       const response = await fetch(`${apiBaseUrl}/api/forum/like/${id}`, {
@@ -56,6 +58,32 @@ const ForumThread = () => {
     } catch (err) {
       setError('Failed to like post');
       console.error('Error liking post:', err);
+    }
+  };
+
+  // add comment to post
+  const handleComment = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/forum/comment/${id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ content: comment }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to post comment');
+      }
+
+      const updatedPost = await response.json();
+      setPost(updatedPost);
+      setComment(''); // Clear comment input after posting
+    } catch (err) {
+      setError('Failed to post comment');
+      console.error('Error posting comment:', err);
     }
   };
 
@@ -81,7 +109,7 @@ const ForumThread = () => {
             <p className='post-category'>Category: {post.category}</p>
             <p className='post-author'>Posted by: {post.userId.username}</p>
             <p className='post-date'>
-              Posted on: {new Date(post.createdAt).toLocaleDateString()}
+              Posted on: {new Date(post.createdAt).toLocaleString()}
             </p>
             <div className='post-body'>{post.content}</div>
             <div className='post-stats'>
@@ -99,6 +127,34 @@ const ForumThread = () => {
               <span>
                 <FaComment className='icon' /> {post.comments?.length || 0}
               </span>
+            </div>
+
+            <div className='comments-section'>
+              <h2>Comments</h2>
+              <form onSubmit={handleComment} className='comment-form'>
+                <textarea
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder='Write a comment...'
+                  required
+                />
+                <button type='submit'>Post Comment</button>
+              </form>
+
+              <div className='comments-list'>
+                {post.comments &&
+                  post.comments.map((comment, index) => (
+                    <div key={index} className='comment'>
+                      <p className='comment-author'>
+                        {comment.userId.username}
+                      </p>
+                      <p className='comment-content'>{comment.content}</p>
+                      <p className='comment-date'>
+                        {new Date(comment.createdAt).toLocaleString()}
+                      </p>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         )}

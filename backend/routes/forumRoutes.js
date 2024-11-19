@@ -72,7 +72,35 @@ router.get('/get-posts-by-userid', authenticateToken, async (req, res) => {
   }
 });
 
-// todo: add comment to post route
+// add comment to post route
+router.post('/comment/:postId', authenticateToken, async (req, res) => {
+  try {
+    const { content } = req.body;
+    const post = await Post.findById(req.params.postId);
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    const comment = {
+      userId: req.user.id,
+      content: content,
+    };
+
+    post.comments.push(comment);
+    await post.save();
+
+    // return updated post with populated fields
+    const updatedPost = await Post.findById(req.params.postId)
+      .populate('userId', 'username')
+      .populate('likes', 'username')
+      .populate('comments.userId', 'username');
+
+    res.json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ error: 'Error adding comment' });
+  }
+});
 
 // todo: delete post route
 
