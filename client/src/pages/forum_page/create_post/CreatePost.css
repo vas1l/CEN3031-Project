@@ -67,8 +67,8 @@
   width: 12%; 
 }
 /* General styling for input and textarea */
-input[type="text"],
-content {
+
+#title {
     background-color: white; 
     border: 2px solid #fa4616; 
     color: black;
