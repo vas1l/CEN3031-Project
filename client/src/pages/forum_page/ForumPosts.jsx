@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { apiBaseUrl } from '../../../utils/url';
 import './ForumPosts.css';
 import './Createpostbutton.css';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaComment } from 'react-icons/fa';
 
 function ForumPosts() {
   const [posts, setPosts] = useState([]);
@@ -123,6 +123,10 @@ function ForumPosts() {
                   </>
                 )}
               </button>
+              <span className='comment-count'>
+                <FaComment className='icon' />{' '}
+                {post.comments ? post.comments.length : 0}
+              </span>
             </div>
           </div>
         ))}
