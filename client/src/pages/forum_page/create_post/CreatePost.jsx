@@ -13,7 +13,7 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${apiBaseUrl}/api/forum/create`, {
+      const response = await fetch(`${apiBaseUrl}/api/forum/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +43,9 @@ function CreatePost() {
 
   return (
     <div className='create-post-container'>
-      <button id='back-to-forum-btn' onClick={handleBack}>Back to Forum</button>
+      <button id='back-to-forum-btn' onClick={handleBack}>
+        Back to Forum
+      </button>
       <h1>Create New Post</h1>
       {error && <p className='error'>{error}</p>}
 
@@ -63,7 +65,7 @@ function CreatePost() {
 
         <div>
           <label htmlFor='category'>Category: </label>
-          <select 
+          <select
             id='custom-label-select'
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -91,7 +93,9 @@ function CreatePost() {
           />
         </div>
 
-        <button id = 'back-to-forum-btn' type='submit'>Create Post</button>
+        <button id='back-to-forum-btn' type='submit'>
+          Create Post
+        </button>
       </form>
     </div>
   );

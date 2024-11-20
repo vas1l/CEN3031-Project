@@ -12,12 +12,9 @@ const ForumPostsCard = () => {
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const response = await fetch(
-          `${apiBaseUrl}/api/forum/get-posts-by-userid`,
-          {
-            credentials: 'include',
-          }
-        );
+        const response = await fetch(`${apiBaseUrl}/api/forum/users/me/posts`, {
+          credentials: 'include',
+        });
 
         if (!response.ok) {
           throw new Error('Failed to fetch posts');

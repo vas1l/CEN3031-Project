@@ -6,7 +6,7 @@ const authenticateToken = require('../middleware/validateJWT');
 // /api/forum
 
 // get all posts route
-router.get('/get-all-posts', authenticateToken, async (req, res) => {
+router.get('/posts', authenticateToken, async (req, res) => {
   try {
     const posts = await Post.find()
       .populate('userId', 'username') // only get username and id from User model
@@ -17,25 +17,8 @@ router.get('/get-all-posts', authenticateToken, async (req, res) => {
   }
 });
 
-// get specific post by id route
-router.get('/get-post/:id', authenticateToken, async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id)
-      .populate('userId', 'username')
-      .populate('comments.userId', 'username');
-
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
-    }
-
-    res.json(post);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching post' });
-  }
-});
-
 // create new post route
-router.post('/create', authenticateToken, async (req, res) => {
+router.post('/posts', authenticateToken, async (req, res) => {
   try {
     const { title, content, category } = req.body;
 
@@ -54,10 +37,26 @@ router.post('/create', authenticateToken, async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+// get specific post by id route
+router.get('/posts/:id', authenticateToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id)
+      .populate('userId', 'username')
+      .populate('comments.userId', 'username');
+
+    if (!post) {
+      return res.status(404).json({ error: 'Post not found' });
+    }
+
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching post' });
+  }
+});
 
 // get forum posts by userid (JWT) route
 // for the dashboard page
-router.get('/get-posts-by-userid', authenticateToken, async (req, res) => {
+router.get('/users/me/posts', authenticateToken, async (req, res) => {
   try {
     const posts = await Post.find({ userId: req.user.id })
       .populate('userId', 'username')
@@ -73,10 +72,10 @@ router.get('/get-posts-by-userid', authenticateToken, async (req, res) => {
 });
 
 // add comment to post route
-router.post('/comment/:postId', authenticateToken, async (req, res) => {
+router.post('/posts/:id/comments', authenticateToken, async (req, res) => {
   try {
     const { content } = req.body;
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.id);
 
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });
@@ -91,7 +90,7 @@ router.post('/comment/:postId', authenticateToken, async (req, res) => {
     await post.save();
 
     // return updated post with populated fields
-    const updatedPost = await Post.findById(req.params.postId)
+    const updatedPost = await Post.findById(req.params.id)
       .populate('userId', 'username')
       .populate('likes', 'username')
       .populate('comments.userId', 'username');
@@ -105,9 +104,9 @@ router.post('/comment/:postId', authenticateToken, async (req, res) => {
 // todo: delete post route
 
 // like/unlike post route
-router.put('/like/:postId', authenticateToken, async (req, res) => {
+router.put('/posts/:id/like', authenticateToken, async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.id);
 
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });

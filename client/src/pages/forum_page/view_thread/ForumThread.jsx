@@ -16,7 +16,7 @@ const ForumThread = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/forum/get-post/${id}`, {
+        const response = await fetch(`${apiBaseUrl}/api/forum/posts/${id}`, {
           credentials: 'include',
         });
 
@@ -44,7 +44,7 @@ const ForumThread = () => {
   // like post
   const handleLike = async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/forum/like/${id}`, {
+      const response = await fetch(`${apiBaseUrl}/api/forum/posts/${id}/like`, {
         method: 'PUT',
         credentials: 'include',
       });
@@ -65,14 +65,17 @@ const ForumThread = () => {
   const handleComment = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${apiBaseUrl}/api/forum/comment/${id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({ content: comment }),
-      });
+      const response = await fetch(
+        `${apiBaseUrl}/api/forum/posts/${id}/comments`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({ content: comment }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to post comment');

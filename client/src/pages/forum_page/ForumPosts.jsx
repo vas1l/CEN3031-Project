@@ -14,7 +14,7 @@ function ForumPosts() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`${apiBaseUrl}/api/forum/get-all-posts`, {
+        const response = await fetch(`${apiBaseUrl}/api/forum/posts`, {
           credentials: 'include',
         });
 
@@ -33,10 +33,13 @@ function ForumPosts() {
   const handleLike = async (e, postId) => {
     e.stopPropagation();
     try {
-      const response = await fetch(`${apiBaseUrl}/api/forum/like/${postId}`, {
-        method: 'PUT',
-        credentials: 'include',
-      });
+      const response = await fetch(
+        `${apiBaseUrl}/api/forum/posts/${postId}/like`,
+        {
+          method: 'PUT',
+          credentials: 'include',
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to like post');
