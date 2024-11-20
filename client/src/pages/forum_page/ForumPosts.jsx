@@ -81,7 +81,7 @@ function ForumPosts() {
         <button id='create-post-btn'>Create New Post</button>
       </Link>
 
-      <div>
+      <div className='category-filter'>
         <label htmlFor='category'>Filter by Category: </label>
         <select
           id='category'
@@ -106,26 +106,28 @@ function ForumPosts() {
             className='post-item'
             style={{ cursor: 'pointer' }}
           >
-            <h2>{post.title}</h2>
-            <p>Category: {post.category}</p>
-            <p>Posted by: {post.userId.username}</p>
-            <p>{post.content}</p>
-            <p>Posted on: {new Date(post.createdAt).toLocaleDateString()}</p>
-            <div>
-              <button onClick={(e) => handleLike(e, post._id)}>
-                {post.likes && post.likes.length > 0 ? (
-                  <>
-                    <FaHeart className='icon' /> {post.likes.length}
-                  </>
-                ) : (
-                  <>
-                    <FaHeart className='icon' /> 0
-                  </>
-                )}
+            <div className='post-header'>
+              <h2>{post.title}</h2>
+              <span className='category-tag'>{post.category}</span>
+            </div>
+            <div className='post-metadata'>
+              <span className='author'>By {post.userId.username}</span>
+              <span className='date'>
+                {new Date(post.createdAt).toLocaleString()}
+              </span>
+            </div>
+            <p className='post-content'>{post.content}</p>
+            <div className='post-interactions'>
+              <button
+                className='like-button'
+                onClick={(e) => handleLike(e, post._id)}
+              >
+                <FaHeart className='icon' />
+                {post.likes?.length || 0}
               </button>
               <span className='comment-count'>
-                <FaComment className='icon' />{' '}
-                {post.comments ? post.comments.length : 0}
+                <FaComment className='icon' />
+                {post.comments?.length || 0}
               </span>
             </div>
           </div>
