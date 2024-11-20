@@ -1,50 +1,83 @@
-.forum-thread-container {
+.thread-container {
   margin-top: 80px;
   width: 100%;
   padding-left: 10px;
 }
 
-.back-button {
+.thread-back-button {
 }
 
-.post-content {
+.thread-post-content {
 }
 
-.post-category {
+.thread-post-category {
 }
 
-.post-author {
+.thread-post-author {
 }
 
-.post-date {
+.thread-post-date {
 }
 
-.post-body {
+.thread-post-body {
 }
 
-.post-stats {
+.thread-post-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
 }
 
-.icon {
+.thread-like-button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff6b6b;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+  font-weight: 500;
 }
 
-.comments-section {
+.thread-like-button:hover {
+  background-color: #fff1f1;
 }
 
-.comment-form {
+.thread-comment-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff6b6b;
+  font-weight: 500;
 }
 
-.comments-list {
+.thread-icon {
+  font-size: 18px;
 }
 
-.comment {
+.thread-comments-section {
 }
 
-.comment-author {
+.thread-comment-form {
 }
 
-.comment-content {
+.thread-comments-list {
 }
 
-.comment-date {
+.thread-comment {
+}
+
+.thread-comment-author {
+}
+
+.thread-comment-content {
+}
+
+.thread-comment-date {
 }

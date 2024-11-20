@@ -92,46 +92,49 @@ const ForumThread = () => {
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className='thread-error'>{error}</div>;
   }
 
   return (
     <>
       <LoggedInNavbar />
-      <div className='forum-thread-container'>
-        <button onClick={handleBack} className='back-button'>
+      <div className='thread-container'>
+        <button onClick={handleBack} className='thread-back-button'>
           Back to Forum
         </button>
 
         {post && (
-          <div className='post-content'>
+          <div className='thread-post-content'>
             <h1>{post.title}</h1>
-            <p className='post-category'>Category: {post.category}</p>
-            <p className='post-author'>Posted by: {post.userId.username}</p>
-            <p className='post-date'>
+            <p className='thread-post-category'>Category: {post.category}</p>
+            <p className='thread-post-author'>
+              Posted by: {post.userId.username}
+            </p>
+            <p className='thread-post-date'>
               Posted on: {new Date(post.createdAt).toLocaleString()}
             </p>
-            <div className='post-body'>{post.content}</div>
-            <div className='post-stats'>
-              <button onClick={handleLike}>
+            <div className='thread-post-body'>{post.content}</div>
+            <div className='thread-post-stats'>
+              <button onClick={handleLike} className='thread-like-button'>
                 {post.likes && post.likes.length > 0 ? (
                   <>
-                    <FaHeart className='icon' /> {post.likes.length}
+                    <FaHeart className='thread-icon' /> {post.likes.length}
                   </>
                 ) : (
                   <>
-                    <FaHeart className='icon' /> 0
+                    <FaHeart className='thread-icon' /> 0
                   </>
                 )}
               </button>
-              <span>
-                <FaComment className='icon' /> {post.comments?.length || 0}
+              <span className='thread-comment-count'>
+                <FaComment className='thread-icon' />{' '}
+                {post.comments?.length || 0}
               </span>
             </div>
 
-            <div className='comments-section'>
+            <div className='thread-comments-section'>
               <h2>Comments</h2>
-              <form onSubmit={handleComment} className='comment-form'>
+              <form onSubmit={handleComment} className='thread-comment-form'>
                 <textarea
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
@@ -141,15 +144,17 @@ const ForumThread = () => {
                 <button type='submit'>Post Comment</button>
               </form>
 
-              <div className='comments-list'>
+              <div className='thread-comments-list'>
                 {post.comments &&
                   post.comments.map((comment, index) => (
-                    <div key={index} className='comment'>
-                      <p className='comment-author'>
+                    <div key={index} className='thread-comment'>
+                      <p className='thread-comment-author'>
                         {comment.userId.username}
                       </p>
-                      <p className='comment-content'>{comment.content}</p>
-                      <p className='comment-date'>
+                      <p className='thread-comment-content'>
+                        {comment.content}
+                      </p>
+                      <p className='thread-comment-date'>
                         {new Date(comment.createdAt).toLocaleString()}
                       </p>
                     </div>
