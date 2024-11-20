@@ -31,7 +31,7 @@ function ForumPosts() {
   }, []);
 
   const handleLike = async (e, postId) => {
-    e.stopPropagation(); // Prevent post click when liking
+    e.stopPropagation();
     try {
       const response = await fetch(`${apiBaseUrl}/api/forum/like/${postId}`, {
         method: 'PUT',

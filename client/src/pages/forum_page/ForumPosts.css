@@ -80,6 +80,10 @@
   font-size: 1.5rem;
   font-weight: 900;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
 }
 
 .category-tag {
@@ -114,6 +118,12 @@
   font-size: 1.05rem;
   font-weight: 400;
   margin: 15px 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 .post-interactions {
