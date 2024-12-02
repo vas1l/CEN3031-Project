@@ -8,7 +8,7 @@ function LoggedInNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navbarRef = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation(); // get the current pathname to show active class on current page link
+  const location = useLocation();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -65,6 +65,7 @@ function LoggedInNavbar() {
         </button>
       </div>
 
+      {/* Desktop Menu */}
       <ul className='menu'>
         <Link
           to='/dashboard'
@@ -95,6 +96,7 @@ function LoggedInNavbar() {
         </Link>
       </ul>
 
+      {/* Mobile Dropdown Menu */}
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
         <ul>
           <Link
@@ -114,6 +116,15 @@ function LoggedInNavbar() {
             onClick={closeMenu}
           >
             Chat with Albert
+          </Link>
+          <Link
+            to='/forum'
+            className={`menu-item ${
+              location.pathname === '/forum' ? 'active' : ''
+            }`}
+            onClick={closeMenu}
+          >
+            Community Forum
           </Link>
           <Link
             to='/'
