@@ -23,7 +23,7 @@ function Chat() {
     inputRef.current?.focus();
   }, [messages, isLoading]);
 
-  // Auto scroll to bottom when messages change
+  // auto scroll to bottom when messages change
   useEffect(() => {
     if (messageListRef.current) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
@@ -41,7 +41,7 @@ function Chat() {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input;
-    setInput(''); // clear input field after user sends message
+    setInput('');
 
     setMessages((prev) => [...prev, { role: 'user', content: userMessage }]);
 

@@ -140,7 +140,6 @@
   display: block;
 }
 
-/* Remove the active underline for mobile menu items */
 .mobile-menu .menu-item.active::after {
   display: none;
 }
