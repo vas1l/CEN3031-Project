@@ -1,25 +1,72 @@
 .thread-container {
   margin-top: 80px;
   width: 100%;
-  padding-left: 10px;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .thread-back-button {
+  background-color: #fa4616;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 30px;
+}
+
+.thread-back-button:hover {
+  background-color: #e03a0c;
 }
 
 .thread-post-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.thread-post-content h1 {
+  color: #333;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .thread-post-category {
+  background-color: #fa4616;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 15px;
 }
 
 .thread-post-author {
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .thread-post-date {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
 }
 
 .thread-post-body {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  margin: 20px 0;
+  white-space: pre-wrap;
 }
 
 .thread-post-stats {
@@ -62,22 +109,97 @@
 }
 
 .thread-comments-section {
+  margin-top: 30px;
+}
+
+.thread-comments-section h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .thread-comment-form {
+  margin-bottom: 30px;
+}
+
+.thread-comment-form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.thread-comment-form textarea:focus {
+  outline: none;
+  border-color: #fa4616;
+  box-shadow: 0 0 0 2px rgba(250, 70, 22, 0.1);
+}
+
+.thread-comment-form button {
+  background-color: #fa4616;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.thread-comment-form button:hover {
+  background-color: #e03a0c;
 }
 
 .thread-comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .thread-comment {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #eee;
 }
 
 .thread-comment-author {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
 .thread-comment-content {
+  color: #444;
+  line-height: 1.5;
+  margin: 10px 0;
+  white-space: pre-wrap;
 }
 
 .thread-comment-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .thread-container {
+    padding: 0 15px;
+  }
+
+  .thread-post-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .thread-post-body {
+    font-size: 1rem;
+  }
+
+  .thread-comment-form textarea {
+    min-height: 80px;
+  }
 }
