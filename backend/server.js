@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const forumRoutes = require('./routes/forumRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 // load environment variables and check
 dotenv.config();
@@ -54,4 +55,5 @@ mongoose
 // Mount routes
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
-app.use('/api/forum', forumRoutes);
+app.use('/api/forum', forumRoutes); 
+app.use('/api/feeling', dashboardRoutes);

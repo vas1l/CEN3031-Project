@@ -6,6 +6,7 @@ import ProfileCard from '../../components/dashboard_page/ProfileCard';
 import MoodTrackerCard from '../../components/dashboard_page/MoodTrackerCard';
 import ForumPostsCard from '../../components/dashboard_page/ForumPostsCard';
 import LoggedInNavbar from '../../components/loggedInNavbar';
+
 function DashboardPage() {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -28,17 +29,23 @@ function DashboardPage() {
       });
   }, []);
 
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <LoggedInNavbar />
       <h1 className='Title'>Dashboard</h1>
       <h1 className='welcome'>
-        {userData
-          ? `Welcome ${userData.firstname} ${userData.lastname}`
-          : error}
+        {`Welcome ${userData.firstname} ${userData.lastname}`}
       </h1>
       <div className='dashboard-organization'>
-        <MoodTrackerCard userData={userData} />
+        <MoodTrackerCard userId={userData._id} />
         <ProfileCard userData={userData} />
         <ForumPostsCard userData={userData} />
       </div>

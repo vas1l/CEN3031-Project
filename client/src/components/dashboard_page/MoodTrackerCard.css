@@ -4,80 +4,86 @@
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
-  min-height: 350px;
+  max-width: 1656px; /* Limit the width for better layout */
   font-family: 'Poppins';
   font-size: 15px;
   font-weight: 50;
   color: #424242;
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-left: auto;
+  margin-right: auto; /* Center align */
 }
 
+/* Mood Rating Buttons */
 .mood-rating {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly; /* Ensure buttons have even spacing */
+  margin-bottom: 15px;
 }
 
 .mood-button {
   background-color: #f9f9f9;
-  border: none; /* no borders in between */
-  padding: 10px 0; /* padding for buttons */
-  flex: 1; /* buttons will expand equally */
-  font-size: 18px;
+  border: none;
+  padding: 10px 20px; /* Adjust padding for better size */
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  max-width: 200px;
-  font-family: 'Poppins';
-  font-weight: 200;
+  border-radius: 5px; /* Rounded corners for buttons */
 }
 
-.mood-help {
+.mood-button:hover {
+  background-color: #f1f1f1;
+}
+
+.mood-button.active {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.mood-button.submit {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.mood-button.submit:hover {
+  background-color: #0056b3;
+}
+
+/* Links Section */
+.mood-links {
   display: flex;
-  flex-direction: column;
-  font-family: 'Poppins';
-  font-weight: 400;
+  justify-content: center; /* Center align links */
+  gap: 15px; /* Add spacing between links */
+  margin-top: 15px;
+}
+
+.mood-links a {
+  text-decoration: none;
+  color: #888888;
+  font-weight: 300;
   font-size: 12px;
-  color: #474747;
+  transition: color 0.3s ease;
 }
 
-/* Meditation Link */
-.meditation {
-  margin-left: 15px;
-  text-decoration: none; /* Remove underline */
-  color: #888888;
-  font-weight: 300;
-  font-size: 11px;
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.meditation:hover {
-  color: #555555; /* Slightly darker gray on hover */
-}
-
-/* Talk to Albert */
-.talk-to-albert {
-  margin-left: 50px;
-  text-decoration: none; /* Remove underline */
-  color: #888888;
-  font-weight: 300;
-  font-size: 11px;
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.talk-to-albert:hover {
+.mood-links a:hover {
   color: #555555;
 }
 
-/* Forum */
-.forum-link {
-  margin-left: 55px;
-  text-decoration: none; /* Remove underline */
-  color: #888888;
-  font-weight: 300;
-  font-size: 11px;
-  transition: color 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.forum-link:hover {
-  color: #555555;
+/* Placeholder for Past Week Data */
+.mood-help pre {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: #555;
+  max-height: 150px;
+  overflow-y: auto;
 }
