@@ -3,8 +3,9 @@
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
-  min-height: 350px;
   height: 100%;
+  min-height: 350px;
+  max-height: calc(100vh - 250px);
   font-family: 'Poppins';
   font-size: 15px;
   font-weight: 50;
@@ -13,9 +14,20 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .forum-posts {
+    height: auto;
+    min-height: 300px;
+    max-height: none;
+  }
+
+  .posts-container {
+    max-height: 400px;
+  }
 }
 
 .section-title {
@@ -126,11 +138,11 @@
 
 .posts-container {
   flex: 1;
-  max-height: none;
   overflow-y: auto;
+  margin-right: -10px;
   padding-right: 10px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 10px;
+  height: calc(100% - 60px);
 }
 
 .posts-container::-webkit-scrollbar {

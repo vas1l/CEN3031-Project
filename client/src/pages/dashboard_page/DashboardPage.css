@@ -1,12 +1,13 @@
 /* Title */
 .Title {
-  padding-top: 85px;
+  padding-top: 80px;
   margin-left: 40px;
 }
 
 .welcome {
   margin-left: 40px;
   font-weight: lighter;
+  margin-bottom: 15px;
 }
 
 /* Entire Page */
@@ -24,14 +25,17 @@ body {
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   gap: 25px;
-  padding: 25px 50px 0 50px;
+  padding: 0 50px 25px 50px;
+  height: calc(100vh - 200px);
 }
 
 @media (max-width: 768px) {
   .dashboard-organization {
     grid-template-columns: 1fr;
     gap: 0px;
-    padding: 10px 10px;
+    padding: 10px 10px 25px 10px;
+    height: auto;
+    min-height: auto;
   }
 }
 
