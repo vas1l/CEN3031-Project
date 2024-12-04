@@ -5,7 +5,8 @@ const router = express.Router();
 
 // Create a new task
 router.post('/create', authenticateToken, async (req, res) => {
-  const { title, description, category, startTime, endTime, reminder } = req.body;
+  const { title, description, category, startTime, endTime, reminder } =
+    req.body;
 
   if (!title || !startTime) {
     return res.status(400).json({ error: 'Title and start time are required' });
@@ -35,7 +36,9 @@ router.post('/create', authenticateToken, async (req, res) => {
 // Get tasks for a user
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    const tasks = await Task.find({ userId: req.user.id }).sort({ startTime: 1 });
+    const tasks = await Task.find({ userId: req.user.id }).sort({
+      startTime: 1,
+    });
     res.json(tasks);
   } catch (error) {
     console.error(error);
@@ -47,7 +50,5 @@ router.get('/', authenticateToken, async (req, res) => {
 // Update task by id
 
 // Delete task by id
-
-
 
 module.exports = router;

@@ -1,7 +1,4 @@
-// MoodTrackerCard.js
-
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { apiBaseUrl } from '../../../utils/url';
 import './MoodTrackerCard.css';
 import {
@@ -21,7 +18,7 @@ const MoodTrackerCard = ({ userId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Submit mood data
+  // submit mood data
   const handleSubmit = async () => {
     if (!scale) {
       setMessage('Please select a mood scale.');
@@ -30,35 +27,49 @@ const MoodTrackerCard = ({ userId }) => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post(
-        `${apiBaseUrl}/api/feeling`,
-        { userId, scale },
-        { withCredentials: true }
-      );
+      const response = await fetch(`${apiBaseUrl}/api/feeling`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, scale }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to log mood');
+      }
+
       setMessage('Mood logged successfully!');
-      setScale(null); // Reset selected scale
-      fetchPastWeekData(); // Refresh data for the graph
+      setScale(null);
+      fetchPastWeekData();
     } catch (error) {
       console.error('Error logging mood:', error);
-      setMessage(
-        error.response?.data?.message || 'Error logging mood. Please try again.'
-      );
+      setMessage('Error logging mood. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Fetch mood data for the past week
+  // fetch mood data for the past week
   const fetchPastWeekData = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(
+      const response = await fetch(
         `${apiBaseUrl}/api/feeling/past-week/${userId}`,
-        { withCredentials: true }
+        {
+          credentials: 'include',
+        }
       );
 
-      // Process data: format dates and sort
-      const data = response.data.map((entry) => ({
+      if (!response.ok) {
+        throw new Error('Failed to fetch mood data');
+      }
+
+      const responseData = await response.json();
+
+      // format dates and sort
+      const data = responseData.map((entry) => ({
         date: new Date(entry.date).toLocaleDateString('en-US', {
           weekday: 'short',
           month: 'short',
@@ -67,7 +78,7 @@ const MoodTrackerCard = ({ userId }) => {
         scale: entry.scale,
       }));
 
-      // Sort data by date
+      // sort data by date
       data.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       setPastWeekData(data);
@@ -87,10 +98,9 @@ const MoodTrackerCard = ({ userId }) => {
     }
   }, [userId]);
 
-  // Handle the case where userId is not provided
   if (!userId) {
     return (
-      <div className="mood-tracker">
+      <div className='mood-tracker'>
         <h2>Mood Tracker</h2>
         <p>Please log in to use the Mood Tracker.</p>
       </div>
@@ -98,11 +108,11 @@ const MoodTrackerCard = ({ userId }) => {
   }
 
   return (
-    <div className="mood-tracker">
+    <div className='mood-tracker'>
       <h2>Mood Tracker</h2>
 
       {/* Mood Rating Buttons */}
-      <div className="mood-rating">
+      <div className='mood-rating'>
         {[...Array(10)].map((_, i) => (
           <button
             key={i + 1}
@@ -115,9 +125,9 @@ const MoodTrackerCard = ({ userId }) => {
         ))}
       </div>
 
-      {/* Submit Button */}
+      {/* Submit */}
       <button
-        className="mood-button submit"
+        className='mood-button submit'
         onClick={handleSubmit}
         disabled={isSubmitting || !scale}
       >
@@ -125,21 +135,21 @@ const MoodTrackerCard = ({ userId }) => {
       </button>
 
       {/* Message */}
-      {message && <p className="message">{message}</p>}
+      {message && <p className='message'>{message}</p>}
 
       {/* Graph Section */}
-      <div className="mood-graph">
+      <div className='mood-graph'>
         <h3>Past Week Mood Data</h3>
         {isLoading ? (
           <p>Loading mood data...</p>
         ) : pastWeekData.length > 0 ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width='100%' height='100%'>
             <LineChart data={pastWeekData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis dataKey='date' />
               <YAxis domain={[1, 10]} />
               <Tooltip />
-              <Line type="monotone" dataKey="scale" stroke="#8884d8" />
+              <Line type='monotone' dataKey='scale' stroke='#8884d8' />
             </LineChart>
           </ResponsiveContainer>
         ) : (
@@ -148,14 +158,14 @@ const MoodTrackerCard = ({ userId }) => {
       </div>
 
       {/* Links */}
-      <div className="mood-links">
-        <a href="/albert" className="talk-to-albert">
+      <div className='mood-links'>
+        <a href='/albert' className='talk-to-albert'>
           Talk to Albert
         </a>
-        <a href="/forum" className="forum-link">
+        <a href='/forum' className='forum-link'>
           Forum
         </a>
-        <a href="/meditation" className="meditation">
+        <a href='/meditation' className='meditation'>
           Meditation
         </a>
       </div>

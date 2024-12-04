@@ -4,6 +4,7 @@
   margin-bottom: 20px;
   width: 100%;
   min-height: 350px;
+  height: 100%;
   font-family: 'Poppins';
   font-size: 15px;
   font-weight: 50;
@@ -124,9 +125,12 @@
 }
 
 .posts-container {
-  max-height: 280px;
+  flex: 1;
+  max-height: none;
   overflow-y: auto;
   padding-right: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .posts-container::-webkit-scrollbar {

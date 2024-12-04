@@ -24,7 +24,7 @@ const app = express();
 
 // Cors
 const corsOptions = {
-  origin: 'http://localhost:5173', // for dev
+  origin: ['http://localhost:5173', 'http://localhost:5174'], // for dev
   credentials: true,
 };
 
@@ -55,5 +55,5 @@ mongoose
 // Mount routes
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
-app.use('/api/forum', forumRoutes); 
+app.use('/api/forum', forumRoutes);
 app.use('/api/feeling', dashboardRoutes);

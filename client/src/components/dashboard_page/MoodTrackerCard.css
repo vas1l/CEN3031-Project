@@ -1,35 +1,65 @@
-/* Mood Tracker */
+.mood-graph {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  overflow-x: hidden;
+  height: 400px;
+}
+
+@media screen and (max-width: 768px) {
+  .mood-graph {
+    width: 100%;
+    margin: 0 auto;
+    height: 250px;
+  }
+
+  .mood-tracker {
+    padding: 15px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .mood-graph {
+    width: 80%;
+  }
+}
+
 .mood-tracker {
   background-color: white;
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
-  max-width: 1656px; /* Limit the width for better layout */
+  max-width: 1656px;
   font-family: 'Poppins';
   font-size: 15px;
   font-weight: 50;
   color: #424242;
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-left: auto;
-  margin-right: auto; /* Center align */
+  margin-right: auto;
+  overflow-x: hidden;
 }
 
-/* Mood Rating Buttons */
 .mood-rating {
   display: flex;
-  justify-content: space-evenly; /* Ensure buttons have even spacing */
+  justify-content: center;
   margin-bottom: 15px;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .mood-button {
   background-color: #f9f9f9;
   border: none;
-  padding: 10px 20px; /* Adjust padding for better size */
+  padding: 10px 0;
+  min-width: 45px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  border-radius: 5px; /* Rounded corners for buttons */
+  border-radius: 5px;
+  flex: 0 1 auto;
 }
 
 .mood-button:hover {
@@ -56,27 +86,48 @@
   background-color: #0056b3;
 }
 
-/* Links Section */
 .mood-links {
   display: flex;
-  justify-content: center; /* Center align links */
-  gap: 15px; /* Add spacing between links */
+  justify-content: center;
+  gap: 15px;
   margin-top: 15px;
 }
 
 .mood-links a {
+  background-color: #fa4616;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
   text-decoration: none;
-  color: #888888;
-  font-weight: 300;
-  font-size: 12px;
-  transition: color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .mood-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mood-links a {
+    width: 80%;
+    text-align: center;
+  }
 }
 
 .mood-links a:hover {
-  color: #555555;
+  background-color: #0021a5;
+  transform: scale(1.05);
 }
 
-/* Placeholder for Past Week Data */
+.mood-links a:active {
+  background-color: #003f8a;
+  transform: scale(0.95);
+}
+
 .mood-help pre {
   background-color: #f9f9f9;
   padding: 10px;
@@ -86,4 +137,20 @@
   color: #555;
   max-height: 150px;
   overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .mood-rating {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .mood-button {
+    padding: 8px 0;
+    font-size: 14px;
+    width: 100%;
+    min-width: unset;
+  }
 }
