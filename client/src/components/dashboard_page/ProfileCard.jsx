@@ -5,10 +5,7 @@ const ProfileCard = ({ userData }) => {
     <section className='profile'>
       <h2 className='section-title'>Profile Information</h2>
 
-      <p className='about-me'>
-        Hi, my name is Diksha Gupta, and I love Snoopy. If you don't love
-        Snoopy, we're gonna have a problem.
-      </p>
+      <p className='about-me'>Write a short description about yourself.</p>
 
       <div className='profile-info'>
         <div className='info-row'>
@@ -30,7 +27,7 @@ const ProfileCard = ({ userData }) => {
           </p>
         </div>
 
-        <div className='info-row'>
+        {/* <div className='info-row'>
           <p className='heading'>Location:</p>
           <p className='personal-info'>Sample, Location</p>
         </div>
@@ -38,7 +35,7 @@ const ProfileCard = ({ userData }) => {
         <div className='info-row'>
           <p className='heading'>Social Media:</p>
           <p className='personal-info'>Instagram: @sample</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );
