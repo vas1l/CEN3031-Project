@@ -28,10 +28,10 @@ const MoodTrackerCard = ({ userData }) => {
 
         <p>
           Or talk to others:{' '}
-          <a href='#' className='talk-to-albert'>
+          <a href='/albert' className='talk-to-albert'>
             Talk to Albert
           </a>{' '}
-          <a href='#' className='forum-link'>
+          <a href='/forum' className='forum-link'>
             Forum
           </a>
         </p>
